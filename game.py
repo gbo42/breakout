@@ -12,7 +12,7 @@ WIDTH = wsize * wblocks + padding * (wblocks-1)
 HEIGHT = 500
 
 # game objects
-ball = Ball(WIDTH/2, HEIGHT - 40 - 10, WHITE)
+ball = Ball(0, 0, WHITE)
 
 player = Player(WIDTH/2 - 50, HEIGHT - 40, 100, 10, RED)
 
@@ -46,9 +46,12 @@ while running:
     # game logic
     wallsv = [w.rect for w in walls]
     player.move(wallsv)
-    ball.hitPlayer(player)
-    wallsv.append(player.rect)
-    ball.move(wallsv, blocks)
+    if ball.speed.x == 0 and ball.speed.y == 0:
+        ball = Ball(player.x + 50, player.y - 10, WHITE)
+    else:
+        wallsv.append(player.rect)
+        ball.hitPlayer(player)
+        ball.move(wallsv, blocks)
 
     # render
     screen.fill(GRAY)

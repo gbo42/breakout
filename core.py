@@ -21,9 +21,9 @@ class Ball:
         self.y = y - 5
         self.color = color
         self.speed = Vector(0, 0)
-
+        
     def start(self):
-        self.speed = Vector(0, 1)
+        self.speed = Vector(0, -1)
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
@@ -46,8 +46,9 @@ class Ball:
                 self.speed.y = ty/tm
             else:
                 self.speed.y = -ty/tm
-        elif self.y > player.y:
-            self.speed = Vector(0, 0)
+        elif self.y > player.y + 50:
+            self.speed.x = 0
+            self.speed.y = 0
 
         self.x = tempx
         self.y = tempy
@@ -105,6 +106,7 @@ class Ball:
         self.rect.y = tempy
 
         return hit
+
 # wall
 class Wall:
     def __init__(self, x, y, w, h, color):
