@@ -32,6 +32,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
 while running:
+    clock.tick(60)
+    
     # event handler
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

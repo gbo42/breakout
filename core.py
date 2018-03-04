@@ -21,9 +21,9 @@ class Ball:
         self.y = y - 5
         self.color = color
         self.speed = Vector(0, 0)
-        
+
     def start(self):
-        self.speed = Vector(0, -1)
+        self.speed = Vector(0, 1)
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, self.rect)
@@ -41,11 +41,11 @@ class Ball:
             tx = self.x - (player.x+50)
             ty = 50
             tm = math.sqrt(tx*tx + ty*ty)
-            self.speed.x = tx/tm
+            self.speed.x = tx/tm * 5
             if self.speed.y < 0:
-                self.speed.y = ty/tm
+                self.speed.y = ty/tm * 5
             else:
-                self.speed.y = -ty/tm
+                self.speed.y = -ty/tm * 5
         elif self.y > player.y + 50:
             self.speed.x = 0
             self.speed.y = 0
@@ -161,14 +161,14 @@ class Block:
 # handlers for key events
 def keyDown(key, player, ball):
     if key == pygame.K_LEFT:
-        player.changeSpeed(-1, 0)
+        player.changeSpeed(-3, 0)
     if key == pygame.K_RIGHT:
-        player.changeSpeed(1, 0)
+        player.changeSpeed(3, 0)
     if key == pygame.K_SPACE and ball.speed.x == 0 and ball.speed.y == 0:
         ball.start()
 
 def keyUp(key, player):
     if key == pygame.K_LEFT:
-        player.changeSpeed(1, 0)
+        player.changeSpeed(3, 0)
     if key == pygame.K_RIGHT:
-        player.changeSpeed(-1, 0)
+        player.changeSpeed(-3, 0)
